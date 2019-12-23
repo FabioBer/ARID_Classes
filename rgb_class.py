@@ -104,7 +104,7 @@ class ARID_Dataset(object):
         # load images
         img_path = self.dict_scenes['path_img'][idx]
         img = Image.open(img_path).convert("RGB")
-        img = transforms.ToTensor(img)
+        img = transforms.ToTensor()(img)
 
         # get bounding box coordinates for each mask
         num_objs = len(self.dict_scenes['labels'][idx])
