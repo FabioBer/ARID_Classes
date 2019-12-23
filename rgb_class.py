@@ -104,6 +104,7 @@ class ARID_Dataset(object):
         img_path = self.dict_scenes['path_img'][idx]
         
         img = Image.open(img_path).convert("RGB")
+        img = torchvision.transforms.ToTensor(img)
 
         # get bounding box coordinates for each mask
         num_objs = len(self.dict_scenes['labels'][idx])
@@ -134,9 +135,6 @@ class ARID_Dataset(object):
         target["image_id"] = image_id
         target["area"] = area
         target["iscrowd"] = iscrowd
-
-        if self.transforms is not None:
-            img, target = self.transforms(img, target)
 
         return img, target
 
