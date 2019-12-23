@@ -65,7 +65,7 @@ class ARID_Dataset(object):
                 self.dict_scenes['iscrowd'].append(iscrowd_list)
                 self.dict_scenes['image_id'].append(image_id)
                 image_id += 1 # univoque identifier
-                path = osp.join(RGBD_HOME,os.listdir(RGBD_HOME)[i])
+                path = osp.join(self.root,os.listdir(self.root)[i])
                 path = osp.join(path,'rgb')
                 if i < 9:
                     path = osp.join(path,'00'+str(i+1)+'.png')
