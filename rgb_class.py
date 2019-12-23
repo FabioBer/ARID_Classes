@@ -101,9 +101,8 @@ class ARID_Dataset(object):
 
     def __getitem__(self, idx):
         
-        # load images ad masks
+        # load images
         img_path = self.dict_scenes['path_img'][idx]
-        
         img = Image.open(img_path).convert("RGB")
         img = transforms.ToTensor(img)
 
