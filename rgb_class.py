@@ -4,6 +4,7 @@ import numpy as np
 import torch
 from PIL import Image
 import json
+import torchvision.transforms as transforms
     
                 
 class ARID_Dataset(object):
@@ -104,7 +105,7 @@ class ARID_Dataset(object):
         img_path = self.dict_scenes['path_img'][idx]
         
         img = Image.open(img_path).convert("RGB")
-        img = torchvision.transforms.ToTensor(img)
+        img = transforms.ToTensor(img)
 
         # get bounding box coordinates for each mask
         num_objs = len(self.dict_scenes['labels'][idx])
