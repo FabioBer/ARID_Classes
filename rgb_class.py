@@ -57,8 +57,8 @@ class ARID_Dataset(object):
                     boxes_list.append([x_min,y_min,x_max,y_max])
                     area_list.append((x_max-x_min)*(y_max-y_min))
                     lab = data[i]['annotations'][j]['id']
-                        if lab is not None:
-                            labels_list.append(lab[0:len(lab)-2])
+                    if lab is not None:
+                        labels_list.append(lab[0:len(lab)-2])
                     iscrowd_list.append(False) #if True it won't be evaluated                
                 
                 self.dict_scenes['boxes'].append(boxes_list)
