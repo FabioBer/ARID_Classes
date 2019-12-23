@@ -4,9 +4,6 @@ import numpy as np
 import torch
 from PIL import Image
 import json
-
-
-RGBD_HOME = 'C:\\Users\\Admin\\Desktop\\RGBDexperiments\\RGBD\\'
     
                 
 class ARID_Dataset(object):
@@ -145,9 +142,3 @@ class ARID_Dataset(object):
         
         return len(self.dict_scenes['image_id'])
     
-
-
-
-ad = ARID_Dataset(root = RGBD_HOME)
-
-a = ad[1]
