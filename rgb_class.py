@@ -116,7 +116,6 @@ class ARID_Dataset(object):
         # convert everything into a torch.Tensor
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
         
-        # there is only one class
         labels = list()
         for l in self.dict_scenes['labels'][idx]:
             labels.append(self.labels_str2int[l])
