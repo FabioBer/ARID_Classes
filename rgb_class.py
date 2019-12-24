@@ -71,6 +71,8 @@ class ARID_Dataset(object):
                     lab = data[i]['annotations'][j]['id']
                     if lab is not None:
                         labels_list.append(lab[0:len(lab)-2])
+                    else:
+                        labels_list.append(lab)
                     iscrowd_list.append(False) #if True it won't be evaluated                
                 
                 self.dict_scenes['boxes'].append(boxes_list)
@@ -118,7 +120,10 @@ class ARID_Dataset(object):
         
         labels = list()
         for l in self.dict_scenes['labels'][idx]:
-            labels.append(self.labels_str2int[l])
+            if l is not None:
+                labels.append(self.labels_str2int[l])
+            else: #11 labels are None, we consider it negligible
+                labels.append(randrange(51))
         # convert everything into a torch.Tensor
         labels = torch.as_tensor(labels, dtype=torch.int64)
 
