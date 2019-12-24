@@ -43,7 +43,7 @@ class ARID_Dataset(object):
                         for img in images:
                             if img != 'crops' and img != 'crops_processed':
                                 path = osp.join(self.root+direc,osp.join(subdirec,img))
-                                dict_scenes['path_img'].append(path)
+                                self.dict_scenes['path_img'].append(path)
                     else: #json
                         with open(osp.join(self.root+direc,direc+'_labels.json')) as f:
                             data = json.load(f)
