@@ -5,6 +5,7 @@ import torch
 from PIL import Image
 import json
 import torchvision.transforms as transforms
+from random import randrange
     
                 
 class ARID_Dataset(object):
