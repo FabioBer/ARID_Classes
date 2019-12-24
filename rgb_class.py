@@ -19,17 +19,6 @@ class ARID_Dataset(object):
         ##                                                                   ##
         #######################################################################
         
-        data_list = list()
-
-        for direc in os.listdir(self.root):
-            for subdirec in os.listdir(osp.join(self.root+direc)):
-                if subdirec == 'rgb' or subdirec == 'depth' or subdirec == 'pcd':
-                    continue
-                else: #json
-                    with open(osp.join(self.root+direc,direc+'_labels.json')) as f:
-                        data = json.load(f)
-                    data_list.append(data)
-                    
         image_id = 0
         
         self.dict_scenes = dict()
@@ -39,6 +28,28 @@ class ARID_Dataset(object):
         self.dict_scenes['iscrowd'] = list() 
         self.dict_scenes['image_id'] = list()
         self.dict_scenes['path_img'] = list()
+        
+        data_list = list()
+
+        
+        
+        for direc in os.listdir(self.root):
+            for subdirec in os.listdir(osp.join(self.root+direc)):
+                if subdirec == 'depth' or subdirec == 'depth':
+                    continue
+                else:
+                    if subdirec == 'rgb':
+                        images = os.listdir(osp.join(self.root+direc,subdirec))
+                        for img in images:
+                            if img != 'crops' and img != 'crops_processed':
+                                path = osp.join(self.root+direc,osp.join(subdirec,img))
+                                dict_scenes['path_img'].append(path)
+                    else: #json
+                        with open(osp.join(self.root+direc,direc+'_labels.json')) as f:
+                            data = json.load(f)
+                        data_list.append(data)
+                    
+        
         
         for k in range(len(data_list)):
             
@@ -67,19 +78,11 @@ class ARID_Dataset(object):
                 self.dict_scenes['labels'].append(labels_list)
                 self.dict_scenes['iscrowd'].append(iscrowd_list)
                 self.dict_scenes['image_id'].append(image_id)
-                image_id += 1 # univoque identifier
-                path = osp.join(self.root,os.listdir(self.root)[i])
-                path = osp.join(path,'rgb')
-                if i < 9:
-                    path = osp.join(path,'00'+str(i+1)+'.png')
-                else:
-                    path = osp.join(path,'0'+str(i+1)+'.png')
-                self.dict_scenes['path_img'].append(path)
-                
+                image_id += 1 # univoque identifier     
                 
         #######################################################################
         ##                                                                   ##
-        ##   Build a mapping str to int since label are requested to be int   ##
+        ##   Build a mapping str to int since label are requested to be int  ##
         ##                                                                   ##
         #######################################################################
         
