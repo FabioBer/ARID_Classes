@@ -36,7 +36,7 @@ class ARID_Dataset(object):
         
         for direc in os.listdir(self.root):
             for subdirec in os.listdir(osp.join(self.root+direc)):
-                if subdirec == 'depth' or subdirec == 'colsurf' or subdirec =='rgbd':
+                if subdirec == 'depth' or subdirec == 'col_surf' or subdirec =='rgbd':
                     continue
                 else:
                     if subdirec == 'rgb':
